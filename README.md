@@ -1,7 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/mikeland86/graphp/badge)](https://www.codefactor.io/repository/github/mikeland86/graphp) [![CircleCI](https://circleci.com/gh/mikeland86/graphp.svg?style=svg)](https://circleci.com/gh/mikeland86/graphp)
-
-graphp
-======
+# graphp
 
 The GraPHP web framework.
 
@@ -9,19 +6,18 @@ The goal of this project is to build a lightweight web framework with a graph DB
 
 A couple of things that describe graphp:
 
-* Full MVC. Zero boilerplate controllers, models, and views.
-* Models are your schema. Defining data is up to you (but not required).
-* No migrations. Team members can add new models independently without conflicts
-* No DB queries, unless you want to. Transparent model makes it easy to see what happens under the hood.
-* DB API is designed for fast performance. No implicit joins or other magic, but expressive enough for nice readable code.
-* No CLI needed (but supported for cron and tests).
-* All classes are loaded on demand when used for the first time.
-* PHP 5.6+
+- Full MVC. Zero boilerplate controllers, models, and views.
+- Models are your schema. Defining data is up to you (but not required).
+- No migrations. Team members can add new models independently without conflicts
+- No DB queries, unless you want to. Transparent model makes it easy to see what happens under the hood.
+- DB API is designed for fast performance. No implicit joins or other magic, but expressive enough for nice readable code.
+- No CLI needed (but supported for cron and tests).
+- All classes are loaded on demand when used for the first time.
+- PHP 5.6+
 
 A simple example:
 
-Define nodes (your model) with minimum boilerplate
-=
+# Define nodes (your model) with minimum boilerplate
 
 ```php
 class User extends GPNode {
@@ -64,8 +60,8 @@ $account = $user->loadBankAccount()->getOneBankAccount();
 echo $account->getData('balance'); // 125.05
 ```
 
-Controllers
-=
+# Controllers
+
 ```php
 class MyController extends GPController {
 
@@ -80,8 +76,8 @@ class MyController extends GPController {
 }
 ```
 
-Views
-=
+# Views
+
 ```html
 <html>
   <title>
@@ -93,43 +89,41 @@ Views
 <html>
 ```
 
-Libraries
-=
+# Libraries
+
 Avoid bloating models and controllers with business logic. Instead, you can organize your logic in
 library classes that extend `GPLibrary`. These classes inherit all the abilities of Controllers so
 they can be called with `async()` or from the CLI, but they are not reachable on the browser. They
 also have access to any ControllerHandler you write.
 
+# Set up instructions
 
-Set up instructions
-======
-* Install php-7.2+ mysql php-mysqli
-* Run `mysql -u db_user < graphp/db/mysql_schema.sql` to create the database.
-* Point your webserver to public directory.
-* Modify config files to suit your environment.
-* To check out sample app, change the general config 'app_folder' to "sample_app".
+- Install php-7.2+ mysql php-mysqli
+- Run `mysql -u db_user < graphp/db/mysql_schema.sql` to create the database.
+- Point your webserver to public directory.
+- Modify config files to suit your environment.
+- To check out sample app, change the general config 'app_folder' to "sample_app".
 
-
-FAQ
-======
+# FAQ
 
 **What is a graph database and why should I use it?**
 A graph db is a database that uses graph structures for semantic queries with nodes, edges and properties to represent and store data (wikipedia). By giving our nodes, edges, and data nice human readable names we can write pretty, easy to understand code while storing the data in a way that is much more intuitive than relational dbs or key value stores. The flexible schema makes it easy to make structural changes to objects without having to write migrations or make any db changes.
 
-
 **What is a human readable graph? How does this lead to nicer code?**
 The following code loads friends and city for a user and all her friends:
+
 ```php
 $friends = $user->loadCity()->loadFriends()->getFriends();
 batch($friends)->loadFriends()->loadCity();
 ```
 
-
 **What are magic methods, and what do you mean no boilerplate?**
 In graphp, node methods are defined by the graph structure. So if you create a user node with a friend edge and a city edge, you automatically can do things like:
+
 ```php
 $user->addFriend($friend)->save();
 $city = $user->loadCity()->getCity();
 $user->removeAllFriends()->save();
 ```
+
 There are no cli commands to create the node, there is no autogen code, and there is no copy paste boilerplace. All of these methods will work using the minimal node and edge information you provide.
