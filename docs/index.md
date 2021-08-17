@@ -1,3 +1,3 @@
-# Documentation of graphp
+# Documentation of GraPHP
 
-[Controllers](./controller.md)
+- [GPController](./gp_controller.md)
