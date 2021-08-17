@@ -1,1 +1,3 @@
-# This is the documentation of graphp created by isuma.
+# Documentation of graphp
+
+[Controllers](./controller.md)
