@@ -8,8 +8,10 @@ return [
   // you want non slash to match (or use /?). Use capture groups for arguments:
   // '^/id/(\d+)/?$' => ['Controller', 'index'], passes the capture group match
   // into Controller::index method call.
-  '^/user/([0-9]+)/?$' => ['welcome', 'index'],
+  // '^/user/([0-9]+)/?$' => ['welcome', 'index'],
 
   // For more complicated PHP based routing, extend GPRouteGenerator
   // '^/api/v1/(.*)$' => MyCustomRouteGenerator::class,
+
+  '^/api/v1/(.*)$' => APIRouteGenerator::class,
 ];

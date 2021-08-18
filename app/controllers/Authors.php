@@ -2,8 +2,8 @@
 
 class Authors extends GPController
 {
-    public function one()
+    public function all()
     {
-        echo ("One author found!");
+        echo ("All authors found!");
     }
 }

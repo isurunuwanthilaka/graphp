@@ -2,8 +2,14 @@
 
 class Books extends GPController
 {
-    public function one()
+    public function all()
     {
-        echo "book one found!";
+        $data = [['id' => 1, 'name' => 'book1'], ['id' => 2, 'name' => 'book2']];
+        GP::ajax($data);
+    }
+
+    public function view(int $id): void
+    {
+        GP::ajax(['id' => $id]);
     }
 }
